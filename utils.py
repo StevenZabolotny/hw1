@@ -1,6 +1,12 @@
 import re
 from bs4 import BeautifulSoup
 import google
+
+def getinfo(q):
+    return "this is a placeholder"
+
+
+
 ## Reads in text files
 f = open('text.txt')
 text = f.read()
@@ -18,3 +24,5 @@ for name in names:
 
 if __name__ == "__main__":
     print names_dict
+
+
