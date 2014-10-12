@@ -18,8 +18,8 @@ def home():
 
 @app.route("/search/<question>", methods=["GET","POST"])
 def search(question):
-    info = utils.getinfo(question)
-    return render_template("search.html", question=question, info=info)
+    urls = utils.get_urls(question) #Sends question to get_urls function in utils.py, which googles query and generates list of suitable urls
+    return render_template("search.html", question=question, urls=urls)
 
 if __name__=="__main__":
     app.debug = True
