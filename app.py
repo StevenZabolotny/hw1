@@ -11,7 +11,7 @@ def home():
     else:
         b = request.form['b'] #Submit button
         q = request.form['q'] #The question
-        if b == "enter" and q != "":
+        if b == "Enter" and q != "":
             return redirect(url_for('search', question=q)) #Redirects you to page to return search results
         else:
             return render_template("home.html")
@@ -19,6 +19,7 @@ def home():
 @app.route("/search/<question>", methods=["GET","POST"])
 def search(question):
     urls = utils.get_urls(question) #Sends question to get_urls function in utils.py, which googles query and generates list of suitable urls
+    utils.get_names(urls)
     return render_template("search.html", question=question, urls=urls)
 
 if __name__=="__main__":
