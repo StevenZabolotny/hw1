@@ -20,10 +20,12 @@
 	    </thead>
 	    <tbody>
 	      {% for name in names_dict %}
+	      {% if names_dict[name] > 10 %}
 	      <tr>
 	      <td>{{ name }}</td>
 	      <td>{{ names_dict[name] }}</td>
 	      </tr>
+	      {%endif%}
 	      {%endfor%}
 	    </tbody>
 	  <table>
