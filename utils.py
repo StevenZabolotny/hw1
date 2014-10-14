@@ -13,7 +13,7 @@ def getqtype(q):
 
 def get_urls(q):
     results = []
-    for url in search(q, tld = 'com', lang = 'en', num=10, start=0, stop=10, pause=2.0):
+    for url in search(q, tld = 'com', lang = 'en', num=10, start=0, stop=10, pause=0.0):
         results.append(url)
     return results
 
@@ -31,7 +31,7 @@ def get_names(results):
             else:
                 names_dict[name] = 1
         ##print names;
-    return names
+    return names_dict
         
         
     

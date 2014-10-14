@@ -19,8 +19,8 @@ def home():
 @app.route("/search/<question>", methods=["GET","POST"])
 def search(question):
     urls = utils.get_urls(question) #Sends question to get_urls function in utils.py, which googles query and generates list of suitable urls
-    names = utils.get_names(urls)
-    return render_template("search.html", question=question, urls=urls, names=names)
+    names_dict = utils.get_names(urls)
+    return render_template("search.html", question=question, urls=urls, names_dict=names_dict)
 
 if __name__=="__main__":
     app.debug = True
