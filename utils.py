@@ -31,7 +31,7 @@ def get_names(results, question):
         names = re.findall( '[A-Z][a-z]+\s[A-Z][a-z]+', text, flags=0)
         for name in names:
             first_name = name.split(" ")[0]
-            if first_name in first_names and (first_name != "The") and (name.lower() not in question.lower()):
+            if first_name in first_names and (name.lower() not in question.lower()):
                 if name in names_dict:
                     names_dict[name] += 1
                 else:
