@@ -19,7 +19,10 @@ def home():
 @app.route("/search/<question>", methods=["GET","POST"])
 def search(question):
     urls = utils.get_urls(question) #Sends question to get_urls function in utils.py, which googles query and generates list of suitable urls
-    names = utils.get_names(urls)
+    if utils.getqtype(question) == "who":
+        names = utils.get_names(urls)
+    if utils.getqtype(question) == "when":
+        names = utils.get_dates(urls)
     return render_template("search.html", question=question, urls=urls, names=names)
 
 if __name__=="__main__":

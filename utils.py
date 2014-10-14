@@ -19,21 +19,45 @@ def get_urls(q):
 
 def get_names(results):
     names_dict = {}
+    allnames = []
     for url in results:
         url_txt = urllib.urlopen(url)
         html = url_txt.read()
         soup = BeautifulSoup(html)
         text = soup.get_text()
-        names = re.findall( '[A-Z][a-z]*\s[A-Z][a-z]*', text, flags=0)
+        text = text.encode("utf8")
+        names = re.findall( '[A-Z][a-z]*\s[A-Z][a-z]*',text, flags=0)
         for name in names:
             if name in names_dict:
                 names_dict[name] += 1
             else:
                 names_dict[name] = 1
+        allnames.extend(names)
         ##print names;
-    return names
-        
-        
+    return allnames
+
+def get_dates(results):
+    dates_dict = {}
+    alldates = []
+    for url in results:
+        url_txt = urllib.urlopen(url)
+        html = url_txt.read()
+        soup = BeautifulSoup(html)
+        text = soup.get_text()
+        text = text.encode("utf8")
+        dates = re.findall('[0-1][0-9]/[0-3][0-9]/[0-9][0-9]', text, flags=0)
+        dates.extend(re.findall('[0-9]/[0-3][0-9]/[0-9][0-9]', text, flags=0))
+        dates.extend(re.findall('[0-1][0-9]-[0-3][0-9]-[0-9][0-9]', text, flags=0))
+        dates.extend(re.findall('[0-9]-[0-3][0-9]-[0-9][0-9]', text, flags=0))
+        dates.extend(re.findall('[0-1][0-9]\.[0-3][0-9]\.[0-9][0-9]', text, flags=0))
+        dates.extend(re.findall('[0-9]\.[0-3][0-9]\.[0-9][0-9]', text, flags=0))
+        for d in dates:
+            if d in dates_dict:
+                dates_dict[d] += 1
+            else:
+                dates_dict[d] = 1
+        alldates.extend(dates)
+    return alldates      
     
 
 
