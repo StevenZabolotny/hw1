@@ -6,19 +6,30 @@
     </head>
     <body>
       <br><center><font size="32"><b>{{question}}</b></font>
-      <br><br><img src="/static/brian.png" alt="Brian" height="32">
-      <br>says...
+      <br><br><img src="/static/brian.png" alt="Brian" height="50">
+      <br><b>says...</b>
       </center>
       <div class="pure-g">
-	<div class="pure-u-1-2">
-	{% for url in urls %}
-	<br><font size="2">{{url}}</font>
-	{%endfor%}
-	</div>
-	<div class="pure-u-1-2">
-	{% for name in names %}
-	<br><font size="2">{{name}}</font>
-	{%endfor%}
+	<div class="pure-u-1-3"></div>
+	<div class="pure-u-1-3">
+	  <table class="pure-table" align="center">
+	    <thead>
+	      <tr>
+		<th>Name</th>
+		<th>Frequency</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {% for name in names_dict %}
+	      {% if names_dict[name] > 10 %}
+	      <tr>
+	      <td>{{ name }}</td>
+	      <td>{{ names_dict[name] }}</td>
+	      </tr>
+	      {%endif%}
+	      {%endfor%}
+	    </tbody>
+	  <table>
 	</div>
       </div>
     </body>

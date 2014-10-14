@@ -20,10 +20,10 @@ def home():
 def search(question):
     urls = utils.get_urls(question) #Sends question to get_urls function in utils.py, which googles query and generates list of suitable urls
     if utils.getqtype(question) == "who":
-        names = utils.get_names(urls)
+        names_dict = utils.get_names(urls,question)
     if utils.getqtype(question) == "when":
-        names = utils.get_dates(urls)
-    return render_template("search.html", question=question, urls=urls, names=names)
+        names_dict = utils.get_dates(urls)
+    return render_template("search.html", question=question, urls=urls, names_dict=names_dict)
 
 if __name__=="__main__":
     app.debug = True

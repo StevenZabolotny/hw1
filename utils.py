@@ -13,32 +13,34 @@ def getqtype(q):
 
 def get_urls(q):
     results = []
-    for url in search(q, tld = 'com', lang = 'en', num=10, start=0, stop=10, pause=2.0):
+    for url in search(q, tld = 'com', lang = 'en', num=10, start=0, stop=10, pause=0.0):
         results.append(url)
     return results
 
-def get_names(results):
+def get_names(results, question):
     names_dict = {}
-    allnames = []
+    f = open("static/first_names.csv", "r")
+    first_names = f.read()
+    f.close()
+    first_names.split()
     for url in results:
         url_txt = urllib.urlopen(url)
         html = url_txt.read()
         soup = BeautifulSoup(html)
         text = soup.get_text()
         text = text.encode("utf8")
-        names = re.findall( '[A-Z][a-z]*\s[A-Z][a-z]*',text, flags=0)
+        names = re.findall( '[A-Z][a-z]+\s[A-Z][a-z]+', text, flags=0)
         for name in names:
-            if name in names_dict:
-                names_dict[name] += 1
-            else:
-                names_dict[name] = 1
-        allnames.extend(names)
-        ##print names;
-    return allnames
+            first_name = name.split(" ")[0]
+            if first_name in first_names and (name.lower() not in question.lower()):
+                if name in names_dict:
+                    names_dict[name] += 1
+                else:
+                    names_dict[name] = 1
+    return names_dict
 
 def get_dates(results):
     dates_dict = {}
-    alldates = []
     for url in results:
         url_txt = urllib.urlopen(url)
         html = url_txt.read()
@@ -56,8 +58,7 @@ def get_dates(results):
                 dates_dict[d] += 1
             else:
                 dates_dict[d] = 1
-        alldates.extend(dates)
-    return alldates      
+    return dates_dict
     
 
 
