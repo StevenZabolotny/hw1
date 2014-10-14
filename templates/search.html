@@ -15,7 +15,11 @@
 	<br><font size="2">{{url}}</font>
 	{%endfor%}
 	</div>
-	<div class="pure-u-1-2"></div>
+	<div class="pure-u-1-2">
+	{% for name in names %}
+	<br><font size="2">{{name}}</font>
+	{%endfor%}
+	</div>
       </div>
     </body>
   </html>

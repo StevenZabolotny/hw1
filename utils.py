@@ -25,7 +25,13 @@ def get_names(results):
         soup = BeautifulSoup(html)
         text = soup.get_text()
         names = re.findall( '[A-Z][a-z]*\s[A-Z][a-z]*', text, flags=0)
+        for name in names:
+            if name in names_dict:
+                names_dict[name] += 1
+            else:
+                names_dict[name] = 1
         ##print names;
+    return names
         
         
     
