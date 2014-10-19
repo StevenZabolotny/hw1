@@ -23,7 +23,12 @@ def search(question):
         names_dict = utils.get_names(urls,question)
     if utils.getqtype(question) == "when":
         names_dict = utils.get_dates(urls)
-    return render_template("search.html", question=question, urls=urls, names_dict=names_dict)
+    number = 0
+    for i in names_dict:
+        if names_dict[i] > number:
+            answer = i
+            number = names_dict[i]
+    return render_template("search.html", question=question, urls=urls, names_dict=names_dict, answer = answer)
 
 if __name__=="__main__":
     app.debug = True
